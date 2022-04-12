@@ -4,31 +4,31 @@ const Role = use('App/Models/Role');
 
 class RoleController {
      /**
-   * Show a list of all rols.
-   * GET rols
+   * Show a list of all role.
+   * GET role
    *
    * @param {object} ctx
    * @param {Request} ctx.request
    * @param {Response} ctx.response
    * @param {View} ctx.view
    */
-  async index ({ request, response, view }) {
+  async index ({ response }) {
     try{
-      const rols = await Rol.all()
+      const role = await Role.all()
         
       return response.status(200).json({
         "message" : {
           "status" : true, 
-          "message" : "Estos Son Todos Los Roles", 
+          "message" : "Estos Son Todos Los role", 
         },
-        "data" : roles
+        "data" : role
       })
     }
     catch (error){
       return response.status(200).json({
         "message" : {
           "status" : false, 
-          "message" : "No Se Encontraron Los Roles", 
+          "message" : "No Se Encontraron Los role", 
         },
         "data" : error
       })
@@ -36,31 +36,32 @@ class RoleController {
   }
 
   /**
-   * Create/save a new rol.
-   * POST rols
+   * Create/save a new Role.
+   * POST role
    *
    * @param {object} ctx
    * @param {Request} ctx.request
    * @param {Response} ctx.response
    */
   async store ({ request, response }) {
-    const rolData = request.only(Rol.store)
 
-    const rols = await Rol.create(rolData)
+    const rolData = request.only(Role.store)
+
+    const role = await Role.create(rolData)
 
     return response.status(200).json({
       "message" : {
         "status" : true, 
         "message" : "El Usuario Fue Registrado Exitosamente", 
       },
-      "data" : rols
+      "data" : role
     })
 
   }
 
   /**
-  * Display a single Rol.
-  * GET rols/:id
+  * Display a single Role.
+  * GET role/:id
   *
   * @param {object} ctx
   * @param {Request} ctx.request
@@ -70,22 +71,22 @@ class RoleController {
   async show ({ params, response }) {
 
   try{
-    const Rol = await Rol.findOrFail(params.id); 
+    const role = await Role.findOrFail(params.id);
     
     return response.ok({
       "message" : {
         "status" : true, 
-        "message" : "La Rol Fue Encontrada Exitosamente", 
+        "message" : "La Role Fue Encontrada Exitosamente", 
       },
       
-      "data" : Rol
+      "data" : role
     })
   }
   catch(error){
     return response.status(500).json({
       "message" : {
         "status" : false, 
-        "message" : "La Rol No Fue Encontrada", 
+        "message" : "La Role No Fue Encontrada", 
       },
     
       "data" : error
@@ -95,8 +96,8 @@ class RoleController {
   }
 
   /**
-  * Update Rol details.
-  * PUT or PATCH rols/:id
+  * Update Role details.
+  * PUT or PATCH role/:id
   *
   * @param {object} ctx
   * @param {Request} ctx.request
@@ -104,20 +105,22 @@ class RoleController {
   */
   async update ({ request, response, params }) {
       try{
-        const inputs = request.only(Rol.store)
-        const Rol = await Rol.findOrFail(params.id)
 
-        Rol.name = inputs.name;
+        const inputs = request.only(Role.store)
 
-        await Rol.save();
+        const role = await Role.findOrFail(params.id)
+
+        role.name = inputs.name;
+
+        await role.save();
 
         return response.ok({
           "message" : {
             "status" : true, 
-            "message" : "La Rol Fue Actualizada Correctamente", 
+            "message" : "La Role Fue Actualizada Correctamente", 
           },
           
-          "data" : Rol
+          "data" : role
         })
       }
       catch(error){
@@ -132,8 +135,8 @@ class RoleController {
   }
 
   /**
-  * Delete a Rol with id.
-  * DELETE rols/:id
+  * Delete a Role with id.
+  * DELETE role/:id
   *
   * @param {object} ctx
   * @param {Request} ctx.request
@@ -142,18 +145,18 @@ class RoleController {
   async destroy ({ response, params }) {
 
   try{
-    const rol = await Rol.findOrFail(params.id);
+    const role = await Role.findOrFail(params.id);
 
-    Rol.status = !Rol.status; 
+    role.status = !role.status; 
 
-    await Rol.save();
+    await role.save();
 
     return response.ok({
       "message" : {
         "status" : true, 
-        "message" : "La Rol Fue Eliminada Correctamente", 
+        "message" : "La Role Fue Eliminada Correctamente", 
       },
-      "data" : rol
+      "data" : role
     })
   }
   catch(error){

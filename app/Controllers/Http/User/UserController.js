@@ -12,10 +12,10 @@ class UserController {
    * @param {Response} ctx.response
    * @param {View} ctx.view
    */
-  async index ({ response, auth }) {
+  async index ({ response }) {
       const users = await User
       .query()
-      .with('Rol')
+      .with('Role')
       .fetch()
       
       return response.ok({
@@ -57,29 +57,20 @@ class UserController {
    * @param {Response} ctx.response
    * @param {View} ctx.view
    */
-  async show ({ params, request, response, auth }) {
+  async show ({ response, auth }) {
 
-    try{
-      const a =  auth.user
-      const b = await a.with('Rol').fetch()      
+    const a = await User.findOrFail(auth.user.id);
+
+    //AGREAGAR EL ROL
     
-      return response.ok({
-        "message" : {
-          "status" : true, 
-          "message" : "Tu Usuario Fue Encontrado Con Exito", 
-        },
-        "data" : b
-      })
-    }
-    catch(error){
-      return response.status(500).json({
-        "message" : {
-          "status" : false, 
-          "message" : "Tu Usuario No Fue Encontrado", 
-        },
-        "data" : error
-      })
-    }
+    return response.ok({
+    "message" : {
+        "status" : true, 
+        "message" : "Tu Usuario Fue Encontrado Con Exito", 
+    },
+    "data" : a
+    })
+   
     
 
   }
@@ -93,6 +84,7 @@ class UserController {
    * @param {Response} ctx.response
    */
   async update ({ auth, request, response, params }) {
+
    const userdata =  await User.findOrFail(auth.user.id)
 
     const inputs = request.only(['username', 'email', 'password'])
@@ -103,14 +95,12 @@ class UserController {
 
     userdata.save();
 
-    const json = userdata.toJSON()
-
     return response.ok({
       "message" : {
         "status" : true, 
         "message" : "Tu Usuario Fue Actualizado Correctamente", 
       },
-      "data" : json
+      "data" : userdata
     })
   }
 
@@ -122,22 +112,20 @@ class UserController {
    * @param {Request} ctx.request
    * @param {Response} ctx.response
    */
-  async destroy ({ auth, request, response }) {
+  async destroy ({ auth, response }) {
     
     const userdata = await User.findOrFail(auth.user.id);
 
-    userdata.soft_delete = !userdata.soft_delete; 
+    userdata.status = !userdata.status; 
 
     userdata.save();
-
-    const json = userdata.toJSON();
 
     return response.ok({
       "message" : {
         "status" : true, 
         "message" : "Tu Usuario Fue Eliminado Correctamente", 
       },
-      "data" : json
+      "data" : userdata
     })
   }
 }

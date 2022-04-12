@@ -17,8 +17,8 @@ class CategoryController {
       const categorias = 
       await Categoria
       .query()
-      .with('Vista', (buildre) => {
-        buildre.whereHas('Rols', (builder) => {builder.where('rol_id', auth.user.rol_id)})
+      .with('View', (buildre) => {
+        buildre.whereHas('Roles', (builder) => {builder.where('role_id', auth.user.rol_id)})
       })
       .fetch()
 

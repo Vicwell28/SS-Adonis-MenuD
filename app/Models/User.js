@@ -27,7 +27,7 @@ class User extends Model {
     return ['password', 'created_at', 'updated_at', 'confirmation_token'];
   };
   
-  Rol() {
+  Role() {
     return this.belongsTo('App/Models/Role', 'role_id', 'id');
   };
 

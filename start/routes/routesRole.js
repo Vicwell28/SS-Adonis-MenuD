@@ -7,11 +7,8 @@ Route.get('rol/routes', () => {return { greeting: 'Funciona rutas Rol' }
 
 
 Route.group(() => {
-    Route.resource('rol', 'RolController')
-    .apiOnly().
-    validator(new Map([
-      [['rol.store'], ['rol/StoreRol']]
-    ]))
+    Route.resource('rol', 'RoleController')
+    .apiOnly()
 })
 .prefix('api/v1')
 .namespace('User')

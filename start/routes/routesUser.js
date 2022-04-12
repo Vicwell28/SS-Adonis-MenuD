@@ -9,10 +9,6 @@ Route.get('user/ruta', () => {return { greeting: 'Funciona rutas User' }
 Route.group(() => {
     Route.resource('user', 'UserController')
     .apiOnly()
-    .except(['store'])
-    .validator(new Map([
-      [['user.update'], ['auth/SignInAuth']]
-    ]))
 })
 .prefix('api/v1')
 .namespace('User')

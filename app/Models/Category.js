@@ -23,8 +23,8 @@ class Category extends Model {
         return ['created_at', 'updated_at'];
         };
         
-        Vista() {
-        return this.hasMany('App/Models/Vista', 'id', 'categoria_id');
+        View() {
+        return this.hasMany('App/Models/View', 'id', 'category_id');
         };
 }
 
