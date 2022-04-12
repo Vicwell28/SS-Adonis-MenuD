@@ -1,10 +1,11 @@
 'use strict'
-use('./routes/routesAuth');
-use('./routes/routesCategoria');
-use('./routes/routesRol');
-use('./routes/routesRolVista');
-use('./routes/routesUser');
-use('./routes/routesVista');
+use('./routes/routesAuth.js');
+use('./routes/routesCategory.js');
+use('./routes/routesRole.js');
+use('./routes/routesRoleView.js');
+use('./routes/routesUser.js');
+use('./routes/routesView.js');
+
 const Route = use('Route')
 
 Route.get('/', () => {

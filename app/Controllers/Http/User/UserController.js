@@ -1,63 +1,7 @@
 'use strict'
-const User = use('App/Models/User');
 
 class UserController {
-
-    async login ({ auth, request, response }) {
-        const { email, password } = request.only(User.store);
-        console.log({email, password})
-        const resul =  await auth.withRefreshToken().attempt(email, password); 
-    
-        return response.ok({
-          "message" : {
-            "status" : true, 
-            "message" : "Haz iniciado sesion exitosamente"
-          }, 
-          "data" : resul
-        })
-        //VALIDAR LOS CAMPOS
-      }
-    
-      async logout ({ auth, request, response }) {
-    
-        const apiToken = auth.getAuthHeader()
-        console.log(apiToken); 
-    
-        await auth
-        .authenticator('jwt')
-        .revokeTokens([apiToken], true)
-    
-        return response.ok({
-          "message" : {
-            "status" : true, 
-            "message" : "Haz cerrado sesion exitosamente", 
-          }, 
-          "data" : auth.check()
-        })
-        
-      }
-    
-      async signIn ({request, auth ,response}){
-        const userData = request.only(User.store);
-    
-        const user = await User.create(userData);
-    
-        console.log(userData);
-        console.log(user);
-        
-        const resul =  await auth.withRefreshToken().attempt(userData.email, userData.password); 
-    
-    
-        return response.ok({
-          "message" : {
-            "status" : true, 
-            "message" : "Te has registrado con exito."
-          },
-          "data" : resul
-        });
-      }
-
-      /**
+    /**
    * Show a list of all users.
    * GET users
    *

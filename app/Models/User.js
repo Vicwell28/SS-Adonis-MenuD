@@ -26,6 +26,10 @@ class User extends Model {
   static get hidden () {
     return ['password', 'created_at', 'updated_at', 'confirmation_token'];
   };
+  
+  Rol() {
+    return this.belongsTo('App/Models/Rol', 'rol_id', 'id');
+  };
 
   
   static boot () {
