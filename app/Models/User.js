@@ -28,7 +28,7 @@ class User extends Model {
   };
   
   Rol() {
-    return this.belongsTo('App/Models/Rol', 'rol_id', 'id');
+    return this.belongsTo('App/Models/Role', 'role_id', 'id');
   };
 
   

@@ -1,5 +1,7 @@
 'use strict'
 
+const User = use('App/Models/User');
+
 class UserController {
     /**
    * Show a list of all users.

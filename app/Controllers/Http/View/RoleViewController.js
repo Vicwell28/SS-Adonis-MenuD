@@ -1,5 +1,7 @@
 'use strict'
 
+const RoleView = use('App/Models/RoleView');
+
 class RoleViewController {
     /**
    * Show a list of all rolvistas.

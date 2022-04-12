@@ -1,5 +1,7 @@
 'use strict'
 
+const Category = use('App/Models/Category');
+
 class CategoryController {
     /**
    * Show a list of all categorias.

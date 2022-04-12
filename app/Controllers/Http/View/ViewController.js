@@ -1,5 +1,7 @@
 'use strict'
 
+const View = use('App/Models/View');
+
 class ViewController {
      /**
    * Show a list of all vistas.

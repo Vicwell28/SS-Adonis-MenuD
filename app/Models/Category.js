@@ -5,7 +5,7 @@ const Model = use('Model')
 
 class Category extends Model {
     static get store(){
-        return ['name', 'icono', 'nivel', 'opciones', 'status']
+        return ['name', 'icon', 'level', 'status']
         }
     
     

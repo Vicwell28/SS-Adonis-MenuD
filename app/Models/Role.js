@@ -9,7 +9,7 @@ class Role extends Model {
     }
 
     static get table () {
-    return 'rols'
+    return 'roles'
   }
 
   static get primaryKey () {
@@ -23,12 +23,12 @@ class Role extends Model {
     //RELACIONES
 
     User() {
-        return this.hasMany('App/Models/User', 'id', 'rol_id')
+        return this.hasMany('App/Models/User', 'id', 'role_id')
     }
 
-    Vista() {
-      return this.belongsToMany('App/Models/Vista', 'rol_id', 'vista_id', 'id', 'id')
-      .pivotTable('rol_vistas')
+    View() {
+      return this.belongsToMany('App/Models/View', 'role_id', 'view_id', 'id', 'id')
+      .pivotTable('role_views')
   }
 }
 

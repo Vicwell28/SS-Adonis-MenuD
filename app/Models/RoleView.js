@@ -5,12 +5,12 @@ const Model = use('Model')
 
 class RoleView extends Model {
     static get store(){
-        return ['rol_id', 'vista_id']
+        return ['role_id', 'view_id']
         }
     
     
         static get table () {
-        return 'rol_vistas';
+        return 'role_views';
         };
     
     
@@ -23,8 +23,8 @@ class RoleView extends Model {
         return ['created_at', 'updated_at'];
         };
         
-        Vista() {
-        return this.belongsTo('App/Models/Rol', 'rol_id', 'id');
+        View() {
+        return this.belongsTo('App/Models/Role', 'role_id', 'id');
         };
 }
 

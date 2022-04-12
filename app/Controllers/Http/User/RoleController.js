@@ -1,5 +1,6 @@
 'use strict'
-const Rol = use('App/Models/Rol');
+
+const Role = use('App/Models/Role');
 
 class RoleController {
      /**

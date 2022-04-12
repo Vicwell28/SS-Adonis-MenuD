@@ -5,11 +5,11 @@ const Model = use('Model')
 
 class View extends Model {
     static get store(){
-        return ['name', 'icono', 'nivel', 'opciones', 'status', 'ruta', 'categoria_id']
+        return ['name', 'icon', 'level', 'status', 'route', 'category_id']
         }
     
         static get table () {
-        return 'vistas';
+        return 'views';
         };
     
         static get primaryKey () {
@@ -23,13 +23,13 @@ class View extends Model {
         
     
         //RELACIONES
-        Categoria() {
-        return this.belongsTo('App/Models/Categoria', 'categoria_id', 'id');
+        Category() {
+        return this.belongsTo('App/Models/Category', 'category_id', 'id');
         };
     
-        Rols () {
-            return this.belongsToMany('App/Models/Rol', 'vista_id', 'rol_id', 'id', 'id')
-            .pivotTable('rol_vistas')
+        Roles () {
+            return this.belongsToMany('App/Models/Role', 'view_id', 'role_id', 'id', 'id')
+            .pivotTable('role_views')
         }
 }
 
