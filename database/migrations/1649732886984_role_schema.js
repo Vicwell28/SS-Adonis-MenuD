@@ -7,6 +7,8 @@ class RoleSchema extends Schema {
   up () {
     this.create('roles', (table) => {
       table.increments()
+      table.string('name', 50).notNullable()
+      table.boolean('status').defaultTo(1)
       table.timestamps()
     })
   }

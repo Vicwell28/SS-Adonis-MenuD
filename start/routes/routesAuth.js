@@ -8,7 +8,6 @@ Route.get('auth/route', () => {return { greeting: 'Funciona rutas Auth' }
 
 
 Route.group(() => {
-    console.log("Entra En la ruta"); 
     Route.post('login', 'AuthController.login').validator('auth/LoginAuth'); 
     Route.post('logout', 'AuthController.logout').middleware(['auth']);
     Route.post('register', 'AuthController.signIn').validator('auth/SignInAuth');

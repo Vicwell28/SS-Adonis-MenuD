@@ -7,6 +7,10 @@ class CategorySchema extends Schema {
   up () {
     this.create('categories', (table) => {
       table.increments()
+      table.string('name').nullable()
+      table.string('icon').nullable()
+      table.string('level').nullable()
+      table.boolean('status').defaultTo(1)
       table.timestamps()
     })
   }
