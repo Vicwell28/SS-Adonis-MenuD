@@ -1,16 +1,12 @@
 'use strict'
 
 const User = use('App/Models/User');
-const Rol = use('App/Models/Rol');
 
 class AuthController {
     async login ({ auth, request, response }) {
-        console.log("Entro En El Controller"); 
         const { email, password } = request.only(User.store);
-        console.log({email, password})
-        return resul =  await auth.withRefreshToken().attempt(email, password); 
-        console.log("NO paso")
-    
+
+        const resul =  await auth.withRefreshToken().attempt(email, password); 
     
         return response.ok({
           "message" : {
@@ -19,14 +15,12 @@ class AuthController {
           }, 
           "data" : resul
         })
-        //VALIDAR LOS CAMPOS
-      }
+    }
     
-      async logout ({ auth, request, response }) {
+    async logout ({ auth, response }) {
     
         const apiToken = auth.getAuthHeader()
-        console.log(apiToken); 
-    
+
         await auth
         .authenticator('jwt')
         .revokeTokens([apiToken], true)
@@ -39,20 +33,19 @@ class AuthController {
           "data" : auth.check()
         })
         
-      }
+    }
     
       async signIn ({request, auth ,response}){
+
         const userData = request.only(User.store);
     
         const user = await User.create(userData);
     
-        console.log(user);
+        // const rol =  await Rol.findBy({name : 'invitado'})
     
-        const rol =  await Rol.findBy({name : 'invitado'})
+        // const r = await user.Rol().associate(rol)
     
-        const r = await user.Rol().associate(rol)
-    
-        const resul =  await auth.withRefreshToken().attempt(user.email, user.password); 
+        const resul =  await auth.withRefreshToken().attempt(userData.email, userData.password); 
     
     
         return response.ok({

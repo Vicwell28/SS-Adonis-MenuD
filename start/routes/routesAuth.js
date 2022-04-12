@@ -8,9 +8,9 @@ Route.get('auth/route', () => {return { greeting: 'Funciona rutas Auth' }
 
 
 Route.group(() => {
-    Route.post('login', 'AuthController.login').validator('auth/LoginAuth'); 
+    Route.post('login', 'AuthController.login'); 
     Route.post('logout', 'AuthController.logout').middleware(['auth']);
-    Route.post('register', 'AuthController.signIn').validator('auth/SignInAuth');
+    Route.post('sign-in', 'AuthController.signIn');
 })
 .prefix('api/v1')
 .namespace('Auth')
