@@ -13,12 +13,18 @@ class CategoryController {
    * @param {View} ctx.view
    */
    async index ({ response, auth }) {
-    try{
+
       const categorias = 
-      await Categoria
+      // await Category
+      // .query()
+      // .with('View', (buildre) => {
+      //   buildre.whereHas('Roles', (builder) => {builder.where('role_id', auth.user.rol_id)})
+      // })
+      // .fetch()
+      await Category
       .query()
-      .with('View', (buildre) => {
-        buildre.whereHas('Roles', (builder) => {builder.where('role_id', auth.user.rol_id)})
+      .with('View', (builder) => {
+       builder.with('Roles')
       })
       .fetch()
 
@@ -29,16 +35,6 @@ class CategoryController {
         },
         "data" : categorias
       })
-    }
-    catch(error){
-      return response.status(500).json({
-        "message" : {
-          "status" : false, 
-          "message" : "Operacion Fallida", 
-        },
-        "data" : error
-      })
-    }
 }
 
 /**
@@ -50,28 +46,17 @@ class CategoryController {
  */
 async store ({ request, response }) { 
 
-  try{
-    const categoriaData = request.only(Categoria.store);
+    const categoriaData = request.only(Category.store);
 
-    const categoria = await Categoria.create(categoriaData);
+    const categoria = await Category.create(categoriaData);
 
     return response.ok({
       "message" : {
         "status" : true, 
-        "message" : "La Categoria Se Ha Registrado Exitosamente.", 
+        "message" : "La Category Se Ha Registrado Exitosamente.", 
       },
       "data" : categoria
     });
-  }
-  catch(error){
-    return response.status(500).json({
-      "message" : {
-        "status" : false, 
-        "message" : "Operacion Fallida", 
-      },
-      "data" : error
-    })
-  }
   
 }
 
@@ -87,12 +72,12 @@ async store ({ request, response }) {
 async show ({ params, response }) {
 
   try{
-    const categoria = await Categoria.findOrFail(params.id); 
+    const categoria = await Category.findOrFail(params.id); 
     
     return response.ok({
       "message" : {
         "status" : true, 
-        "message" : "La Categoria Fue Encontrada Exitosamente", 
+        "message" : "La Category Fue Encontrada Exitosamente", 
       },
       "data" : categoria
     })
@@ -101,7 +86,7 @@ async show ({ params, response }) {
     return response.status(500).json({
       "message" : {
         "status" : false, 
-        "message" : "La Categoria No Fue Encontrada", 
+        "message" : "La Category No Fue Encontrada", 
       },
       "data" : error
     })
@@ -120,8 +105,8 @@ async show ({ params, response }) {
 async update ({ request, response, params }) {
 
   try{
-    const inputs = request.only(Categoria.store)
-    const categoria = await Categoria.findOrFail(params.id)
+    const inputs = request.only(Category.store)
+    const categoria = await Category.findOrFail(params.id)
 
     categoria.name = inputs.name;
     categoria.icono = inputs.icono;
@@ -134,7 +119,7 @@ async update ({ request, response, params }) {
     return response.ok({
       "message" : {
         "status" : true, 
-        "message" : "La Categoria Fue Actualizada Correctamente", 
+        "message" : "La Category Fue Actualizada Correctamente", 
       },
       "data" : categoria
     })
@@ -161,7 +146,7 @@ async update ({ request, response, params }) {
 async destroy ({ response, params }) {
 
   try{
-    const categoriadata = await Categoria.findOrFail(params.id);
+    const categoriadata = await Category.findOrFail(params.id);
 
     categoriadata.status = !categoriadata.status; 
 
@@ -170,7 +155,7 @@ async destroy ({ response, params }) {
     return response.ok({
       "message" : {
         "status" : true, 
-        "message" : "La Categoria Fue Eliminada Correctamente", 
+        "message" : "La Category Fue Eliminada Correctamente", 
       },
       "data" : categoriadata
     })

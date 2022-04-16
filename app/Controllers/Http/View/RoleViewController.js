@@ -15,7 +15,7 @@ class RoleViewController {
      async index ({ response }) {
 
         try{
-          const rolvistas = await RolVista.all()
+          const rolvistas = await RoleView.all()
         
           return response.ok({
             "message" : {
@@ -45,10 +45,9 @@ class RoleViewController {
      */
     async store ({ request, response }) { 
     
-      try{
-        const rolvistaData = request.only(RolVista.store);
+        const rolvistaData = request.only(RoleView.store);
     
-        const rolvista = await RolVista.create(rolvistaData);
+        const rolvista = await RoleView.create(rolvistaData);
     
         return response.ok({
           "message" : {
@@ -57,17 +56,6 @@ class RoleViewController {
           },
           "data" : rolvista
         });
-      }
-      catch(error){
-        return response.status(500).json({
-          "message" : {
-            "status" : false, 
-            "message" : "Operacion Fallida", 
-          },
-         
-          "data" : error
-        })
-      }
     }
     
     /**
@@ -82,7 +70,7 @@ class RoleViewController {
     async show ({ params, response }) {
     
       try{
-        const rolvista = await RolVista.findOrFail(params.id); 
+        const rolvista = await RoleView.findOrFail(params.id); 
         
         return response.ok({
           "message" : {
@@ -115,8 +103,8 @@ class RoleViewController {
     async update ({ request, response, params }) {
     
       try{
-        const inputs = request.only(RolVista.store)
-        const rolvista = await RolVista.findOrFail(params.id)
+        const inputs = request.only(RoleView.store)
+        const rolvista = await RoleView.findOrFail(params.id)
     
         rolvista.rol_id = inputs.rol_id;
         rolvista.vista_id = inputs.vista_id;
@@ -155,7 +143,7 @@ class RoleViewController {
     async destroy ({ response, params }) {
     
       try{
-        const categoriadata = await RolVista.findOrFail(params.id);
+        const categoriadata = await RoleView.findOrFail(params.id);
     
         //AGREGAR UN STATUS A ESTA MIGRACIN
         categoriadata.rol_id =  0; 

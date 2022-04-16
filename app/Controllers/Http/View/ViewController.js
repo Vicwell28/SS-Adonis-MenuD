@@ -15,8 +15,8 @@ class ViewController {
    async index ({ response }) {
 
     try{
-      // const vistas = await Vista.query().with('Categoria').fetch()
-      const vistas = await Vista.all()
+      // const vistas = await View.query().with('Categoria').fetch()
+      const vistas = await View.all()
     
       return response.ok({
         "message" : {
@@ -47,14 +47,14 @@ class ViewController {
 async store ({ request, response }) { 
 
   try{
-    const vistaDatos = request.only(Vista.store);
+    const vistaDatos = request.only(View.store);
 
-    const vista = await Vista.create(vistaDatos);
+    const vista = await View.create(vistaDatos);
 
     return response.ok({
       "message" : {
         "status" : true, 
-        "message" : "La Vista Se Ha Registrado Exitosamente.", 
+        "message" : "La View Se Ha Registrado Exitosamente.", 
       },
       "data" : vista
     });
@@ -83,12 +83,12 @@ async store ({ request, response }) {
 async show ({ params, response }) {
 
   try{
-    const vista = await Vista.findOrFail(params.id); 
+    const vista = await View.findOrFail(params.id); 
     
     return response.ok({
       "message" : {
         "status" : true, 
-        "message" : "La Vista Fue Encontrada Exitosamente", 
+        "message" : "La View Fue Encontrada Exitosamente", 
       },
       
       "data" : vista
@@ -98,7 +98,7 @@ async show ({ params, response }) {
     return response.status(500).json({
       "message" : {
         "status" : false, 
-        "message" : "La Vista No Fue Encontrada", 
+        "message" : "La View No Fue Encontrada", 
       },
       "data" : error
     })
@@ -117,8 +117,8 @@ async show ({ params, response }) {
 async update ({ request, response, params }) {
 
   try{
-    const inputs = request.only(Vista.store)
-    const vista = await Vista.findOrFail(params.id)
+    const inputs = request.only(View.store)
+    const vista = await View.findOrFail(params.id)
 
     vista.name = inputs.name;
     vista.icono = inputs.icono;
@@ -133,7 +133,7 @@ async update ({ request, response, params }) {
     return response.ok({
       "message" : {
         "status" : true, 
-        "message" : "La Vista Fue Actualizada Correctamente", 
+        "message" : "La View Fue Actualizada Correctamente", 
       },
       "data" : vista
     })
@@ -160,7 +160,7 @@ async update ({ request, response, params }) {
 async destroy ({ response, params }) {
 
   try{
-    const vista = await Vista.findOrFail(params.id);
+    const vista = await View.findOrFail(params.id);
 
     vista.status = !vista.status; 
 
@@ -169,7 +169,7 @@ async destroy ({ response, params }) {
     return response.ok({
       "message" : {
         "status" : true, 
-        "message" : "La Vista Fue Eliminada Correctamente", 
+        "message" : "La View Fue Eliminada Correctamente", 
       },
       "data" : vista
     })

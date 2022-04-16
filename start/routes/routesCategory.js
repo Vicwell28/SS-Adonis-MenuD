@@ -2,16 +2,15 @@
 /** @type {typeof import('@adonisjs/framework/src/Route/Manager')} */
 const Route = use('Route')
 
-
-Route.get('categoria/ruta', () => {return { greeting: 'Funciona rutas Categorias' }
+Route.get('category/ruta', () => {return { greeting: 'Funciona rutas Categorias' }
 }).prefix('api/v1')
 
 
 Route.group(() => {
-    Route.resource('categoria', 'CategoriaController')
+    Route.resource('category', 'CategoryController')
     .apiOnly()
     .validator(new Map([
-      [['categoria.store'], ['view/StoreCategoria']]
+      [['category.store'], ['view/StoreCategory']]
     ]))
 })
 .prefix('api/v1')

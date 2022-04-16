@@ -7,7 +7,7 @@ Route.get('rol/vista/ruta', () => {return { greeting: 'Funciona rutas Rol' }
 
 
 Route.group(() => {
-    Route.resource('rol/vista', 'RolVistaController')
+    Route.resource('role/view', 'RoleViewController')
     .apiOnly()
 })
 .prefix('api/v1')

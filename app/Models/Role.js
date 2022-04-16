@@ -22,8 +22,8 @@ class Role extends Model {
 
     //RELACIONES
 
-    User() {
-        return this.hasMany('App/Models/User', 'id', 'role_id')
+    Users() {
+      return this.hasMany('App/Models/User', 'id', 'role_id')
     }
 
     View() {

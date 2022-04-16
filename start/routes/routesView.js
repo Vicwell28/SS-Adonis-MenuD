@@ -6,7 +6,7 @@ Route.get('vista/ruta', () => {return { greeting: 'Funciona rutas Vista' }
 }).prefix('api/v1')
 
 Route.group(() => {
-    Route.resource('vista', 'VistaController')
+    Route.resource('view', 'ViewController')
     .apiOnly()})
 .prefix('api/v1')
 .namespace('View')
