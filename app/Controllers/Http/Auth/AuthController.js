@@ -17,7 +17,7 @@ class AuthController {
               "status" : false, 
               "message" : "Contraseña incorrecta"
             }, 
-            "data" : null
+            "data" : null 
           }])
         }
 

@@ -14,18 +14,17 @@ class CategoryController {
    */
    async index ({ response, auth }) {
 
-      const categorias = 
-      // await Category
-      // .query()
-      // .with('View', (buildre) => {
-      //   buildre.whereHas('Roles', (builder) => {builder.where('role_id', auth.user.rol_id)})
-      // })
-      // .fetch()
-      await Category
+      const { role_id } = auth.user; 
+
+      const categories = await Category
       .query()
-      .with('View', (builder) => {
-       builder.with('Roles')
+      .whereHas('View', (builder) => {
+        builder.where('status', 1)
+        builder.whereHas('Roles', (builder) => {
+          builder.where('role_id', role_id)
+        })
       })
+      .with('View.Roles')
       .fetch()
 
       return response.ok({
@@ -33,7 +32,7 @@ class CategoryController {
           "status" : true, 
           "message" : "Todas Las Categorias Fueron Encontradas Exitosamente", 
         },
-        "data" : categorias
+        "data" : categories
       })
 }
 

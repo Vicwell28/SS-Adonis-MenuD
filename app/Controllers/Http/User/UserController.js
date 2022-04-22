@@ -58,21 +58,16 @@ class UserController {
    * @param {View} ctx.view
    */
   async show ({ response, auth }) {
-
-    const a = await User.findOrFail(auth.user.id);
-
-    //AGREAGAR EL ROL
+    const user = await User.find(auth.user.id)
+    await user.load('Role')
     
     return response.ok({
     "message" : {
         "status" : true, 
         "message" : "Tu Usuario Fue Encontrado Con Exito", 
     },
-    "data" : a
+    "data" : user
     })
-   
-    
-
   }
 
   /**
