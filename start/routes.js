@@ -1,4 +1,5 @@
 'use strict'
+
 use('./routes/routesAuth.js');
 use('./routes/routesCategory.js');
 use('./routes/routesRole.js');
@@ -11,3 +12,6 @@ const Route = use('Route')
 Route.get('/', () => {
   return { greeting: 'Hello world in JSON' }
 })
+
+
+Route.get('/prueba',  'RoleViewController.prueba').namespace('View')  

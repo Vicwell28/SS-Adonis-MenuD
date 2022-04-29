@@ -1,6 +1,8 @@
 'use strict'
 
 const RoleView = use('App/Models/RoleView');
+const Database = use('Database')
+const trx = await Database.beginTransaction()
 
 class RoleViewController {
     /**
@@ -170,6 +172,13 @@ class RoleViewController {
         })
       }
     
+    }
+
+    async prueba ({response}) {
+      console.log(trx);
+      return response.ok({
+        "message" : "ok"
+      })
     }
 }
 

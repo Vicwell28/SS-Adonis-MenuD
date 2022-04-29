@@ -104,14 +104,9 @@ async show ({ params, response }) {
 async update ({ request, response, params }) {
 
   try{
-    const inputs = request.only(Category.store)
     const categoria = await Category.findOrFail(params.id)
 
-    categoria.name = inputs.name;
-    categoria.icono = inputs.icono;
-    categoria.nivel = inputs.nivel;
-    categoria.opciones = inputs.opciones;
-    categoria.status = inputs.status;
+    categoria.merge(request.only(Category.store))
 
     const res = await categoria.save();
 
