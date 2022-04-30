@@ -12,6 +12,8 @@ Route.group(() => {
     .validator(new Map([
       [['category.store'], ['view/StoreCategory']]
     ]))
+
+    Route.get("get/category/role", 'CategoryController.getCategoryByRole')
 })
 .prefix('api/v1')
 .namespace('View')

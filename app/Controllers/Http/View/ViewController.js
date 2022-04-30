@@ -15,8 +15,7 @@ class ViewController {
    async index ({ response }) {
 
     try{
-      // const vistas = await View.query().with('Categoria').fetch()
-      const vistas = await View.all()
+      const vistas = await View.query().with('Category').fetch()
     
       return response.ok({
         "message" : {
