@@ -15,6 +15,14 @@ class CategoryController {
   async index({ response }) {
     const categories = await Category.all();
 
+    // const categories = await Category
+    //   .query()
+    //   .whereHas('View', (builder) => {
+    //     builder.where('status', 1)
+    //   })
+    //   .with('View')
+    //   .fetch()
+
     return response.ok({
       message: {
         status: true,
@@ -150,12 +158,15 @@ class CategoryController {
       const categories = await Category
       .query()
       .whereHas('View', (builder) => {
-        builder.where('status', 1)
         builder.whereHas('Roles', (builder) => {
+          builder.where('status', true)
           builder.where('role_id', role_id)
         })
       })
-      .with('View.Roles')
+      .with('View', (builder) => {
+        builder.where('status', true)
+        builder.whereHas('Roles')
+      })
       .fetch()
 
       return response.ok({

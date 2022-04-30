@@ -11,7 +11,9 @@ Route.group(() => {
     .apiOnly().
     validator(new Map([
       [['role.store'], ['role/StoreRole']]
-    ]))
+    ])); 
+
+    Route.post('role/assign/view', 'RoleController.assignView')
 })
 .prefix('api/v1')
 .namespace('User')

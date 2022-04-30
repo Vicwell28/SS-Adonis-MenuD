@@ -174,12 +174,7 @@ class RoleViewController {
     
     }
 
-    async prueba ({response}) {
-      console.log(trx);
-      return response.ok({
-        "message" : "ok"
-      })
-    }
+  
 }
 
 module.exports = RoleViewController

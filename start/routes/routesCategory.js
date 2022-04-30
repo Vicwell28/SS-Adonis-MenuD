@@ -18,4 +18,3 @@ Route.group(() => {
 .prefix('api/v1')
 .namespace('View')
 .middleware(['auth'])
-  

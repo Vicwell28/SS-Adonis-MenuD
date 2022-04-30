@@ -31,7 +31,7 @@ module.exports = StoreCategory
 
 
 
-
+//hacerlo hooks
 const existsFn = async (data, field, message, args, get) => {
   const value = get(data, field)
   if (!value) {
